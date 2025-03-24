@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public Character Player { get; private set; }
 
     [SerializeField] private CharacterSO characterData;
-    [SerializeField] public List<ItemSO> itemSOs;
+    public List<ItemSO> itemSOs;
 
     private void Awake()
     {

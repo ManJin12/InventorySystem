@@ -13,7 +13,7 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private int addcontentCount;
     [SerializeField] private GameObject itemSlot;
 
-    [SerializeField] private List<GameObject> uiSlots;
+    [SerializeField] private List<UISlot> uiSlots;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class UIInventory : MonoBehaviour
 
     public void AddContentSize()
     {
-        SetSlot();
+        AddItem();
         currentSlotCount++;
 
         if (addcontentCount < currentSlotCount)
@@ -43,14 +43,43 @@ public class UIInventory : MonoBehaviour
         }
     }
 
-    public void SetSlot()
+    public void AddItem()
+    {
+        int random = Random.Range(0, GameManager.Instance.itemSOs.Count);
+        ItemSO itemSO = GameManager.Instance.itemSOs[random];
+
+        if (!itemSO.canEquip)
+        {
+            UISlot uiSlots = GetItemStack(itemSO);
+            if (uiSlots != null)
+            {
+                uiSlots.amount++;
+                uiSlots.amountText.text = uiSlots.amount.ToString();
+                return;
+            }
+        }
+
+        SetSlot(itemSO);
+    }
+
+    public void SetSlot(ItemSO itemSO)
     {
         GameObject slot = Instantiate(itemSlot, scrollRect.content);
-        uiSlots.Add(slot);
-
         UISlot uiSlot = slot.GetComponent<UISlot>();
-
-        uiSlot.SetItem();
+        uiSlots.Add(uiSlot);
+        uiSlot.SetItem(itemSO);
         uiSlot.slotID = uiSlots.Count - 1;
+    }
+
+    public UISlot GetItemStack(ItemSO itemSO)
+    {
+        for(int i = 0; i < uiSlots.Count; i++)
+        {
+            if (uiSlots[i].item == itemSO && uiSlots[i].amount < itemSO.maxStack)
+            {
+                return uiSlots[i];
+            }
+        }
+        return null;
     }
 }

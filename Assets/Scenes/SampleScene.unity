@@ -1444,6 +1444,7 @@ MonoBehaviour:
   scrollRect: {fileID: 2014506947}
   addcontentCount: 3
   itemSlot: {fileID: 4891746372730603507, guid: 229674550ce6ffe49bf0af9cf0d37e54, type: 3}
+  uiSlots: []
 --- !u!114 &684143788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2879,12 +2880,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: e0cefd77bfb2d8843bd3d1db20630da4, type: 2}
   itemSOs:
+  - {fileID: 11400000, guid: 7bbeb92c8d835f14bb213507e59af81a, type: 2}
+  - {fileID: 11400000, guid: 485a02581ad103b439deb69e9f88dbc1, type: 2}
+  - {fileID: 11400000, guid: e339b48ecbf3043448298e748d8ae4ed, type: 2}
   - {fileID: 11400000, guid: 1f6b1eff801e531419cbe65d44db5c22, type: 2}
   - {fileID: 11400000, guid: 7b1ca81ba4ea86345b01fc161f2e8ee5, type: 2}
   - {fileID: 11400000, guid: 62cdb413b529b3e4d8eb7beab488eaed, type: 2}
-  - {fileID: 11400000, guid: e339b48ecbf3043448298e748d8ae4ed, type: 2}
-  - {fileID: 11400000, guid: 485a02581ad103b439deb69e9f88dbc1, type: 2}
-  - {fileID: 11400000, guid: 7bbeb92c8d835f14bb213507e59af81a, type: 2}
 --- !u!1 &971245275
 GameObject:
   m_ObjectHideFlags: 0

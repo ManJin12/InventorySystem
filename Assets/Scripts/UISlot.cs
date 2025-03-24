@@ -17,17 +17,18 @@ public class UISlot : MonoBehaviour
     public int amount;
 
 
-    public void SetItem()
+    public void SetItem(ItemSO newItem)
     {
-        item = GetItem();
+        item = newItem;
         icon.sprite = item.itemImage;
         button.GetComponent<Image>().sprite = item.slotImage;
+        amount = 1;
         amountText.text = item.canEquip ? string.Empty : amount.ToString();
     }
 
     private ItemSO GetItem()
     {
-        int itemCount = Random.Range(0, GameManager.Instance.itemSOs.Count);
+        int itemCount = Random.Range(0, GameManager.Instance.itemSOs.Count - 1);
         ItemSO item = GameManager.Instance.itemSOs[itemCount];
         return item;
     }

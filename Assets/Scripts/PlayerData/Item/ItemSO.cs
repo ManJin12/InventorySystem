@@ -29,6 +29,7 @@ public class ItemSO : ScriptableObject
     public Sprite slotImage; // 슬롯 이미지
     public ItemType itemType; // 아이템 타입
 
+    public int maxStack; // 최대 스택 수
     public StatType statType; // 능력치 타입
     public int itemValue; // 증가되는 능력치
 
