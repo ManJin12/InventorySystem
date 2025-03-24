@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a94e5f2e4f1f48bcac6aa1bd031f9, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: 
+  itemName: Key
+  itemDescription: "\uC5F4\uC1E0 \uC785\uB2C8\uB2E4. \uD2B9\uC815 \uCF58\uD150\uCE20\uC5D0\uC11C
+    \uC774\uC6A9 \uAC00\uB2A5\uD569\uB2C8\uB2E4. (\uBBF8\uAD6C\uD604)"
+  itemImage: {fileID: 21300000, guid: 520080cad2df443e880b0ed41658460f, type: 3}
+  slotImage: {fileID: 21300000, guid: 35d7e6588f1f34db1b9a5e62f4efdf77, type: 3}
+  itemType: 2
+  statType: 0
+  itemValue: 0
