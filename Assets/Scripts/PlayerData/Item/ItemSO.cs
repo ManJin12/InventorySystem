@@ -31,4 +31,7 @@ public class ItemSO : ScriptableObject
 
     public StatType statType; // 능력치 타입
     public int itemValue; // 증가되는 능력치
+
+    public bool canEquip; // 장착 가능 여부
+    public bool isEquipped; // 장착 여부
 }

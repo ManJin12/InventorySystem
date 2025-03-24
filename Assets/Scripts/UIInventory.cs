@@ -13,6 +13,8 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private int addcontentCount;
     [SerializeField] private GameObject itemSlot;
 
+    [SerializeField] private List<GameObject> uiSlots;
+
     private void Start()
     {
         exitButton.onClick.AddListener(CloseInventory);
@@ -23,7 +25,7 @@ public class UIInventory : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-    
+
     public void CloseInventory()
     {
         gameObject.SetActive(false);
@@ -31,13 +33,24 @@ public class UIInventory : MonoBehaviour
 
     public void AddContentSize()
     {
-        GameObject slot = Instantiate(itemSlot, scrollRect.content);
+        SetSlot();
         currentSlotCount++;
 
         if (addcontentCount < currentSlotCount)
         {
             currentSlotCount = 1;
             scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, scrollRect.content.sizeDelta.y + 120);
-        } 
+        }
+    }
+
+    public void SetSlot()
+    {
+        GameObject slot = Instantiate(itemSlot, scrollRect.content);
+        uiSlots.Add(slot);
+
+        UISlot uiSlot = slot.GetComponent<UISlot>();
+
+        uiSlot.SetItem();
+        uiSlot.slotID = uiSlots.Count - 1;
     }
 }
