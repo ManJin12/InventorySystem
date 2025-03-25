@@ -19,6 +19,6 @@ MonoBehaviour:
   itemType: 1
   maxStack: 0
   statType: 1
-  itemValue: 0
+  itemValue: 10
   canEquip: 1
   isEquipped: 0

@@ -18,7 +18,7 @@ MonoBehaviour:
   slotImage: {fileID: 21300000, guid: c7ade68a31f1d4e12a57617409b6ee8a, type: 3}
   itemType: 0
   maxStack: 0
-  statType: 0
-  itemValue: 0
+  statType: 2
+  itemValue: 10
   canEquip: 1
   isEquipped: 0

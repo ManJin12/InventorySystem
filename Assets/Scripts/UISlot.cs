@@ -16,6 +16,12 @@ public class UISlot : MonoBehaviour
     public int slotID;
     public int amount;
 
+    public UIInventory inventory;
+
+    private void Start()
+    {
+        button.onClick.AddListener(OnClickButtion);
+    }
 
     public void SetItem(ItemSO newItem)
     {
@@ -25,11 +31,8 @@ public class UISlot : MonoBehaviour
         amount = 1;
         amountText.text = item.canEquip ? string.Empty : amount.ToString();
     }
-
-    private ItemSO GetItem()
+    public void OnClickButtion()
     {
-        int itemCount = Random.Range(0, GameManager.Instance.itemSOs.Count - 1);
-        ItemSO item = GameManager.Instance.itemSOs[itemCount];
-        return item;
+        inventory.InteractionSlot(slotID);
     }
 }
