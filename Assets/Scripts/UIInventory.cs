@@ -160,6 +160,7 @@ public class UIInventory : MonoBehaviour
             }
 
             player.EquipItem(selectedItem);  // Character¿« EquipItem »£√‚
+            UpdateStatDisplay();
             Debug.Log($"{selectedItem.itemName} ¿Â¬¯µ .");
         }
     }
@@ -171,5 +172,10 @@ public class UIInventory : MonoBehaviour
             player.UnEquipItem(selectedItem);  // Character¿« UnEquipItem »£√‚
             Debug.Log($"{selectedItem.itemName} «ÿ¡¶µ .");
         }
+    }
+
+    public void UpdateStatDisplay()
+    {
+        UIManager.Instance.UIStatus.SetCharacterInfo(player);
     }
 }
