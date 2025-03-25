@@ -32,6 +32,9 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private ItemSO selectedItem;
     [SerializeField] private int selectedItemIndex;
 
+    private Dictionary<ItemType, UISlot> equippedItemSlots = new Dictionary<ItemType, UISlot>();
+
+
     [SerializeField] private Character player;
 
     private void Start()
@@ -48,7 +51,7 @@ public class UIInventory : MonoBehaviour
 
         exitButton.onClick.AddListener(CloseInventory);
         addButton.onClick.AddListener(AddContentSize);
-        equipButton.onClick.AddListener(EquipSelectedItem);
+        equipButton.onClick.AddListener(ToggleEquipItem);
     }
 
     public void OpenInventory()
@@ -141,37 +144,100 @@ public class UIInventory : MonoBehaviour
         selectedItemDescription.text = selectedItem.itemDescription;
         selectedItemStatName.text = selectedItem.itemType.ToString();
         selectedItemStatValue.text = selectedItem.itemValue.ToString();
+
+        // 선택한 슬롯이 장착 상태인지 검사
+        if (uiSlots[index].equiped)
+        {
+            equipText.text = "해제";
+        }
+        else
+        {
+            equipText.text = "장착";
+        }
     }
+
+
+    // 장착 또는 해제 버튼을 누를 때 실행될 함수
+    private void ToggleEquipItem()
+    {
+        if (selectedItem == null)
+        {
+            Debug.LogError("선택된 아이템이 없습니다!");
+            return;
+        }
+
+        // 이미 장착된 아이템이면 해제, 아니면 장착
+        if (equippedItemSlots.ContainsKey(selectedItem.itemType))
+        {
+            UnEquipSelectedItem();
+        }
+        else
+        {
+            EquipSelectedItem();
+        }
+    }
+
 
     public void EquipSelectedItem()
     {
-        if (selectedItem != null)
+        if (selectedItem == null)
         {
-            if (selectedItem == null)
-            {
-                Debug.LogError("선택된 아이템이 없습니다!");
-                return;
-            }
-
-            if (player == null)
-            {
-                Debug.LogError("Player 객체가 null입니다!");
-                return;
-            }
-
-            player.EquipItem(selectedItem);  // Character의 EquipItem 호출
-            UpdateStatDisplay();
-            Debug.Log($"{selectedItem.itemName} 장착됨.");
+            Debug.LogError("선택된 아이템이 없습니다!");
+            return;
         }
+
+        if (player == null)
+        {
+            Debug.LogError("Player 객체가 null입니다!");
+            return;
+        }
+
+        // 기존 장착된 아이템 해제
+        if (equippedItemSlots.TryGetValue(selectedItem.itemType, out UISlot previousSlot))
+        {
+            previousSlot.equipIcon.gameObject.SetActive(false);
+            previousSlot.equiped = false; // 기존 슬롯 장착 해제
+        }
+
+        player.EquipItem(selectedItem);
+
+        // 새롭게 장착한 아이템의 슬롯을 찾아서 equipIcon 활성화
+        UISlot slot = uiSlots[selectedItemIndex];
+        slot.equipIcon.gameObject.SetActive(true);
+        slot.equiped = true; // 장착 상태 저장
+
+        // 새롭게 장착한 슬롯을 저장
+        equippedItemSlots[selectedItem.itemType] = slot;
+
+        // UI 업데이트
+        equipText.text = "해제";
+        UpdateStatDisplay();
+        Debug.Log($"{selectedItem.itemName} 장착됨.");
+
     }
 
     public void UnEquipSelectedItem()
     {
-        if (selectedItem != null)
+        if (selectedItem == null)
         {
-            player.UnEquipItem(selectedItem);  // Character의 UnEquipItem 호출
-            Debug.Log($"{selectedItem.itemName} 해제됨.");
+            Debug.LogError("선택된 아이템이 없습니다!");
+            return;
         }
+
+        player.UnEquipItem(selectedItem);
+
+        // 장착 해제된 아이템의 equipIcon을 비활성화
+        if (equippedItemSlots.TryGetValue(selectedItem.itemType, out UISlot slot))
+        {
+            slot.equipIcon.gameObject.SetActive(false);
+            slot.equiped = false; // 해당 슬롯 장착 해제
+            equippedItemSlots.Remove(selectedItem.itemType);
+        }
+
+        // UI 업데이트
+        equipText.text = "장착";
+        UpdateStatDisplay();
+        Debug.Log($"{selectedItem.itemName} 해제됨.");
     }
 
     public void UpdateStatDisplay()

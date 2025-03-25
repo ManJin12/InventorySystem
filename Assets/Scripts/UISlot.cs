@@ -14,6 +14,7 @@ public class UISlot : MonoBehaviour
     public TextMeshProUGUI amountText;
 
     public int slotID;
+    public bool equiped = false;
     public int amount;
 
     public UIInventory inventory;
