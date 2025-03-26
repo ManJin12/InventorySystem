@@ -93,4 +93,5 @@ public class Character
             Debug.LogWarning("적용할 수 없는 스탯 타입");
         }
     }
+
 }

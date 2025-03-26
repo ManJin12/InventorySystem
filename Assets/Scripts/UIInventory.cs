@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
@@ -51,7 +49,7 @@ public class UIInventory : MonoBehaviour
 
         exitButton.onClick.AddListener(CloseInventory);
         addButton.onClick.AddListener(AddContentSize);
-        equipButton.onClick.AddListener(ToggleEquipItem);
+        equipButton.onClick.AddListener(EquipSelectedItem);
     }
 
     public void OpenInventory()
@@ -70,7 +68,7 @@ public class UIInventory : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-        }  
+        }
     }
 
     public void AddContentSize()
@@ -116,7 +114,7 @@ public class UIInventory : MonoBehaviour
 
     public UISlot GetItemStack(ItemSO itemSO)
     {
-        for(int i = 0; i < uiSlots.Count; i++)
+        for (int i = 0; i < uiSlots.Count; i++)
         {
             if (uiSlots[i].item == itemSO && uiSlots[i].amount < itemSO.maxStack)
             {
@@ -155,28 +153,6 @@ public class UIInventory : MonoBehaviour
             equipText.text = "장착";
         }
     }
-
-
-    // 장착 또는 해제 버튼을 누를 때 실행될 함수
-    private void ToggleEquipItem()
-    {
-        if (selectedItem == null)
-        {
-            Debug.LogError("선택된 아이템이 없습니다!");
-            return;
-        }
-
-        // 이미 장착된 아이템이면 해제, 아니면 장착
-        if (equippedItemSlots.ContainsKey(selectedItem.itemType))
-        {
-            UnEquipSelectedItem();
-        }
-        else
-        {
-            EquipSelectedItem();
-        }
-    }
-
 
     public void EquipSelectedItem()
     {
@@ -236,7 +212,6 @@ public class UIInventory : MonoBehaviour
 
         // UI 업데이트
         equipText.text = "장착";
-        UpdateStatDisplay();
         Debug.Log($"{selectedItem.itemName} 해제됨.");
     }
 
