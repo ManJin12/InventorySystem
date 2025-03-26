@@ -25,6 +25,7 @@ public class Character
         CharacterName = characterData.characterName;
         Level = characterData.level;
         CurrentExperience = characterData.exp;
+        Gold = characterData.gold;
         Damage = characterData.damage;
         Defense = characterData.defense;
         Health = characterData.health;
