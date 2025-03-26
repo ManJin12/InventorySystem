@@ -42,11 +42,6 @@ public class Character
         };
     }
 
-    public void AddItem(ItemSO itemSO)
-    {
-        inventory.Add(itemSO);
-    }
-
     public void EquipItem(ItemSO itemSO)
     {
         if (!itemSO.canEquip)
