@@ -49,7 +49,7 @@ public class UIInventory : MonoBehaviour
 
         exitButton.onClick.AddListener(CloseInventory);
         addButton.onClick.AddListener(AddContentSize);
-        equipButton.onClick.AddListener(EquipSelectedItem);
+        equipButton.onClick.AddListener(ToggleEquipItem);
     }
 
     public void OpenInventory()
@@ -154,6 +154,28 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    private void ToggleEquipItem()
+    {
+        if (selectedItem == null)
+        {
+            Debug.LogError("선택된 아이템이 없습니다!");
+            return;
+        }
+
+        // 현재 선택한 슬롯을 가져옴
+        UISlot selectedSlot = uiSlots[selectedItemIndex];
+
+        // 이미 장착된 슬롯이라면 해제
+        if (selectedSlot.equiped)
+        {
+            UnEquipSelectedItem();
+        }
+        else
+        {
+            EquipSelectedItem();
+        }
+    }
+
     public void EquipSelectedItem()
     {
         if (selectedItem == null)
@@ -212,6 +234,7 @@ public class UIInventory : MonoBehaviour
 
         // UI 업데이트
         equipText.text = "장착";
+        UpdateStatDisplay();
         Debug.Log($"{selectedItem.itemName} 해제됨.");
     }
 
